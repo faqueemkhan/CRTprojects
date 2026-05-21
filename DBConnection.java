@@ -1,37 +1,26 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
-import java.io.FileInputStream;
 
 public class DBConnection {
+
+    static final String URL =
+            "jdbc:mysql://localhost:3306/hospitaldb";
+
+    static final String USER =
+            "root";
+
+    static final String PASSWORD =
+            "NewPassword123!";
 
     public static Connection getConnection() {
 
         try {
 
-            Properties props =
-                    new Properties();
-
-            props.load(
-                    new FileInputStream(
-                            "config.properties"
-                    )
-            );
-
-            String url =
-                    props.getProperty("db.url");
-
-            String user =
-                    props.getProperty("db.user");
-
-            String password =
-                    props.getProperty("db.password");
-
             Connection con =
                     DriverManager.getConnection(
-                            url,
-                            user,
-                            password
+                            URL,
+                            USER,
+                            PASSWORD
                     );
 
             System.out.println(

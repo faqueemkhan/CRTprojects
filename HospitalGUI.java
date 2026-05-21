@@ -1,4 +1,4 @@
-import java.lang.classfile.Label;
+import javafx.scene.control.Label;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -36,7 +36,7 @@ public class HospitalGUI extends Application {
         // ================= HEADER =================
 
         Label title =
-                new Label("RAMDOBABA HOSPITAL");
+                new Label("RAMDEOBABA HOSPITAL");
 
         title.setFont(
                 Font.font(
