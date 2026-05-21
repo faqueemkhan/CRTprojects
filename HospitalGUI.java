@@ -1,3 +1,5 @@
+import java.lang.classfile.Label;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -228,7 +230,7 @@ public class HospitalGUI extends Application {
 
         // ================= BUTTON ACTIONS =================
 
-        admitBtn.setOnAction(e -> {
+       admitBtn.setOnAction(e -> {
 
     try {
 
@@ -245,13 +247,18 @@ public class HospitalGUI extends Application {
                         daysField.getText()
                 );
 
+        // ================= TOTAL FEE =================
+
+        int totalFee =
+                days * 700;
+
         // ================= DATABASE CODE =================
 
         java.sql.Connection con =
                 DBConnection.getConnection();
 
         String query =
-                "INSERT INTO patients(patient_id, patient_name, days) VALUES (?, ?, ?)";
+                "INSERT INTO patients(patient_id, patient_name, days, total_fee) VALUES (?, ?, ?, ?)";
 
         java.sql.PreparedStatement ps =
                 con.prepareStatement(query);
@@ -262,25 +269,43 @@ public class HospitalGUI extends Application {
 
         ps.setInt(3, days);
 
+        ps.setInt(4, totalFee);
+
         int rows =
                 ps.executeUpdate();
 
         if (rows > 0) {
 
             output.appendText(
-                    "✅ Patient Saved To Database\n"
+                    "====================================\n" +
+                    "✅ Patient Saved Successfully\n\n" +
+                    "🆔 Patient ID : " + id + "\n" +
+                    "👤 Patient Name : " + name + "\n" +
+                    "📅 Days : " + days + "\n" +
+                    "💰 Total Fee : ₹" + totalFee + "\n" +
+                    "====================================\n\n"
             );
 
         } else {
 
             output.appendText(
-                    "❌ Failed To Save\n"
+                    "❌ Failed To Save Patient\n"
             );
         }
 
-        // Clear fields
+        // ================= HOSPITAL OBJECT =================
+
+        Room patient =
+                new Room(id, name);
+
+        hospital.admitPatient(patient);
+
+        // ================= CLEAR FIELDS =================
+
         idField.clear();
+
         nameField.clear();
+
         daysField.clear();
 
     } catch (Exception ex) {
