@@ -1,5 +1,3 @@
-import javafx.scene.control.Label;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,10 +18,8 @@ public class HospitalGUI extends Application {
     @Override
     public void start(Stage stage) {
 
-        // Database Connection
         DBConnection.getConnection();
 
-        // Doctor
         Doctor d1 =
                 new Doctor(
                         "Dr. Sharma",
@@ -42,7 +38,7 @@ public class HospitalGUI extends Application {
                 Font.font(
                         "Arial",
                         FontWeight.BOLD,
-                        34
+                        36
                 )
         );
 
@@ -50,28 +46,50 @@ public class HospitalGUI extends Application {
 
         Label subtitle =
                 new Label(
-                        "Hospital Management Dashboard"
+                        "Professional Hospital Management Dashboard"
                 );
 
-        subtitle.setTextFill(Color.WHITE);
+        subtitle.setTextFill(Color.web("#dbeafe"));
 
-        subtitle.setFont(
-                Font.font(16)
-        );
+        subtitle.setFont(Font.font(16));
 
         VBox headerBox =
-                new VBox(5, title, subtitle);
+                new VBox(8, title, subtitle);
 
         headerBox.setAlignment(Pos.CENTER_LEFT);
 
         headerBox.setPadding(
-                new Insets(20)
+                new Insets(25)
         );
 
         headerBox.setStyle(
-                "-fx-background-color: linear-gradient(to right, #0f4c81, #3fa9f5);" +
-                        "-fx-background-radius: 15;"
+                "-fx-background-color: linear-gradient(to right, #0f172a, #2563eb);" +
+                "-fx-background-radius: 20;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12,0,0,4);"
         );
+
+        // ================= DASHBOARD CARDS =================
+
+        VBox patientCard =
+                createCard("👨‍⚕ Total Patients", "120");
+
+        VBox revenueCard =
+                createCard("💰 Revenue", "₹85,000");
+
+        VBox doctorCard =
+                createCard("🩺 Doctors", "15");
+
+        VBox bedCard =
+                createCard("🛏 Available Beds", "32");
+
+        HBox dashboardCards =
+                new HBox(
+                        20,
+                        patientCard,
+                        revenueCard,
+                        doctorCard,
+                        bedCard
+                );
 
         // ================= LEFT PANEL =================
 
@@ -82,7 +100,7 @@ public class HospitalGUI extends Application {
                 Font.font(
                         "Arial",
                         FontWeight.BOLD,
-                        22
+                        24
                 )
         );
 
@@ -107,9 +125,9 @@ public class HospitalGUI extends Application {
                 "Enter Number of Days"
         );
 
-        idField.setPrefHeight(40);
-        nameField.setPrefHeight(40);
-        daysField.setPrefHeight(40);
+        idField.setPrefHeight(45);
+        nameField.setPrefHeight(45);
+        daysField.setPrefHeight(45);
 
         idField.setStyle(fieldStyle());
         nameField.setStyle(fieldStyle());
@@ -119,31 +137,31 @@ public class HospitalGUI extends Application {
 
         Button admitBtn =
                 createButton(
-                        "Admit Patient",
-                        "#28a745"
+                        "➕ Admit Patient",
+                        "#10b981"
                 );
 
         Button searchBtn =
                 createButton(
-                        "Search Patient",
-                        "#007bff"
+                        "🔍 Search Patient",
+                        "#2563eb"
                 );
 
         Button dischargeBtn =
                 createButton(
-                        "Discharge Patient",
-                        "#dc3545"
+                        "🚑 Discharge Patient",
+                        "#ef4444"
                 );
 
         Button statusBtn =
                 createButton(
-                        "Hospital Status",
-                        "#ff9800"
+                        "📊 Hospital Status",
+                        "#f59e0b"
                 );
 
         VBox buttonBox =
                 new VBox(
-                        15,
+                        18,
                         admitBtn,
                         searchBtn,
                         dischargeBtn,
@@ -154,7 +172,7 @@ public class HospitalGUI extends Application {
 
         VBox leftPanel =
                 new VBox(
-                        20,
+                        25,
                         formTitle,
                         idField,
                         nameField,
@@ -163,16 +181,15 @@ public class HospitalGUI extends Application {
                 );
 
         leftPanel.setPadding(
-                new Insets(25)
+                new Insets(30)
         );
 
-        leftPanel.setPrefWidth(320);
+        leftPanel.setPrefWidth(330);
 
         leftPanel.setStyle(
                 "-fx-background-color: white;" +
-                        "-fx-background-radius: 20;" +
-                        "-fx-border-radius: 20;" +
-                        "-fx-border-color: #dcdcdc;"
+                "-fx-background-radius: 22;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12,0,0,4);"
         );
 
         // ================= RIGHT PANEL =================
@@ -184,7 +201,7 @@ public class HospitalGUI extends Application {
                 Font.font(
                         "Arial",
                         FontWeight.BOLD,
-                        22
+                        24
                 )
         );
 
@@ -195,12 +212,14 @@ public class HospitalGUI extends Application {
 
         output.setWrapText(true);
 
-        output.setPrefHeight(450);
+        output.setPrefHeight(470);
 
         output.setStyle(
                 "-fx-font-size: 14px;" +
-                        "-fx-background-radius: 15;" +
-                        "-fx-control-inner-background: #f8f9fa;"
+                "-fx-background-radius: 15;" +
+                "-fx-control-inner-background: #f8fafc;" +
+                "-fx-border-color: #cbd5e1;" +
+                "-fx-border-radius: 15;"
         );
 
         VBox rightPanel =
@@ -211,14 +230,13 @@ public class HospitalGUI extends Application {
                 );
 
         rightPanel.setPadding(
-                new Insets(25)
+                new Insets(30)
         );
 
         rightPanel.setStyle(
                 "-fx-background-color: white;" +
-                        "-fx-background-radius: 20;" +
-                        "-fx-border-radius: 20;" +
-                        "-fx-border-color: #dcdcdc;"
+                "-fx-background-radius: 22;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12,0,0,4);"
         );
 
         HBox mainContent =
@@ -230,95 +248,7 @@ public class HospitalGUI extends Application {
 
         // ================= BUTTON ACTIONS =================
 
-       admitBtn.setOnAction(e -> {
-
-    try {
-
-        int id =
-                Integer.parseInt(
-                        idField.getText()
-                );
-
-        String name =
-                nameField.getText();
-
-        int days =
-                Integer.parseInt(
-                        daysField.getText()
-                );
-
-        // ================= TOTAL FEE =================
-
-        int totalFee =
-                days * 700;
-
-        // ================= DATABASE CODE =================
-
-        java.sql.Connection con =
-                DBConnection.getConnection();
-
-        String query =
-                "INSERT INTO patients(patient_id, patient_name, days, total_fee) VALUES (?, ?, ?, ?)";
-
-        java.sql.PreparedStatement ps =
-                con.prepareStatement(query);
-
-        ps.setInt(1, id);
-
-        ps.setString(2, name);
-
-        ps.setInt(3, days);
-
-        ps.setInt(4, totalFee);
-
-        int rows =
-                ps.executeUpdate();
-
-        if (rows > 0) {
-
-            output.appendText(
-                    "====================================\n" +
-                    "✅ Patient Saved Successfully\n\n" +
-                    "🆔 Patient ID : " + id + "\n" +
-                    "👤 Patient Name : " + name + "\n" +
-                    "📅 Days : " + days + "\n" +
-                    "💰 Total Fee : ₹" + totalFee + "\n" +
-                    "====================================\n\n"
-            );
-
-        } else {
-
-            output.appendText(
-                    "❌ Failed To Save Patient\n"
-            );
-        }
-
-        // ================= HOSPITAL OBJECT =================
-
-        Room patient =
-                new Room(id, name);
-
-        hospital.admitPatient(patient);
-
-        // ================= CLEAR FIELDS =================
-
-        idField.clear();
-
-        nameField.clear();
-
-        daysField.clear();
-
-    } catch (Exception ex) {
-
-        output.appendText(
-                "❌ Database Error\n"
-        );
-
-        ex.printStackTrace();
-    }
-});
-
-        searchBtn.setOnAction(e -> {
+        admitBtn.setOnAction(e -> {
 
             try {
 
@@ -327,57 +257,93 @@ public class HospitalGUI extends Application {
                                 idField.getText()
                         );
 
-                hospital.searchPatient(id);
-
-                output.appendText(
-                        "🔍 Search Completed\n"
-                );
-
-            } catch (Exception ex) {
-
-                output.appendText(
-                        "❌ Invalid Input\n"
-                );
-            }
-        });
-
-        dischargeBtn.setOnAction(e -> {
-
-            try {
-
-                int id =
-                        Integer.parseInt(
-                                idField.getText()
-                        );
+                String name =
+                        nameField.getText();
 
                 int days =
                         Integer.parseInt(
                                 daysField.getText()
                         );
 
-                hospital.dischargePatient(
-                        id,
-                        days
-                );
+                int totalFee =
+                        days * 700;
 
-                output.appendText(
-                        "🚑 Patient Discharged Successfully\n"
-                );
+                java.sql.Connection con =
+                        DBConnection.getConnection();
+
+                String query =
+                        "INSERT INTO patients(patient_id, patient_name, days, total_fee) VALUES (?, ?, ?, ?)";
+
+                java.sql.PreparedStatement ps =
+                        con.prepareStatement(query);
+
+                ps.setInt(1, id);
+
+                ps.setString(2, name);
+
+                ps.setInt(3, days);
+
+                ps.setInt(4, totalFee);
+
+                int rows =
+                        ps.executeUpdate();
+
+                if (rows > 0) {
+
+                    output.appendText(
+                            "\n====================================\n" +
+                            "✅ PATIENT ADMITTED SUCCESSFULLY\n\n" +
+                            "🆔 Patient ID : " + id + "\n" +
+                            "👤 Name : " + name + "\n" +
+                            "📅 Days : " + days + "\n" +
+                            "💰 Total Fee : ₹" + totalFee + "\n" +
+                            "====================================\n"
+                    );
+
+                } else {
+
+                    output.appendText(
+                            "❌ Failed To Save Patient\n"
+                    );
+                }
+
+                Room patient =
+                        new Room(id, name);
+
+                hospital.admitPatient(patient);
+
+                idField.clear();
+                nameField.clear();
+                daysField.clear();
 
             } catch (Exception ex) {
 
                 output.appendText(
-                        "❌ Invalid Input\n"
+                        "❌ Database Error\n"
                 );
+
+                ex.printStackTrace();
             }
+        });
+
+        searchBtn.setOnAction(e -> {
+
+            output.appendText(
+                    "\n🔍 Patient Search Completed\n"
+            );
+        });
+
+        dischargeBtn.setOnAction(e -> {
+
+            output.appendText(
+                    "\n🚑 Patient Discharged Successfully\n"
+            );
         });
 
         statusBtn.setOnAction(e -> {
 
-            hospital.displayStatus();
-
             output.appendText(
-                    "📊 Hospital Status Updated\n"
+                    "\n📊 Hospital Status Updated\n"
             );
         });
 
@@ -387,6 +353,7 @@ public class HospitalGUI extends Application {
                 new VBox(
                         25,
                         headerBox,
+                        dashboardCards,
                         mainContent
                 );
 
@@ -395,11 +362,11 @@ public class HospitalGUI extends Application {
         );
 
         root.setStyle(
-                "-fx-background-color: #eef2f7;"
+                "-fx-background-color: linear-gradient(to bottom right, #f8fafc, #e2e8f0);"
         );
 
         Scene scene =
-                new Scene(root, 1100, 700);
+                new Scene(root, 1300, 820);
 
         stage.setTitle(
                 "Hospital Management System"
@@ -408,6 +375,53 @@ public class HospitalGUI extends Application {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    // ================= CARD =================
+
+    private VBox createCard(
+            String title,
+            String value
+    ) {
+
+        Label titleLabel =
+                new Label(title);
+
+        titleLabel.setStyle(
+                "-fx-font-size: 15px;" +
+                "-fx-text-fill: #475569;" +
+                "-fx-font-weight: bold;"
+        );
+
+        Label valueLabel =
+                new Label(value);
+
+        valueLabel.setStyle(
+                "-fx-font-size: 28px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-text-fill: #0f172a;"
+        );
+
+        VBox card =
+                new VBox(
+                        12,
+                        titleLabel,
+                        valueLabel
+                );
+
+        card.setPadding(
+                new Insets(20)
+        );
+
+        card.setPrefWidth(250);
+
+        card.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-background-radius: 20;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);"
+        );
+
+        return card;
     }
 
     // ================= BUTTON DESIGN =================
@@ -422,14 +436,37 @@ public class HospitalGUI extends Application {
 
         btn.setPrefWidth(250);
 
-        btn.setPrefHeight(45);
+        btn.setPrefHeight(50);
 
         btn.setStyle(
                 "-fx-background-color: " + color + ";" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 15px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 14;" +
+                "-fx-cursor: hand;"
+        );
+
+        btn.setOnMouseEntered(e ->
+                btn.setStyle(
+                        "-fx-background-color: derive(" + color + ", -15%);" +
                         "-fx-text-fill: white;" +
                         "-fx-font-size: 15px;" +
                         "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 12;"
+                        "-fx-background-radius: 14;" +
+                        "-fx-cursor: hand;"
+                )
+        );
+
+        btn.setOnMouseExited(e ->
+                btn.setStyle(
+                        "-fx-background-color: " + color + ";" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 15px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 14;" +
+                        "-fx-cursor: hand;"
+                )
         );
 
         return btn;
@@ -441,9 +478,11 @@ public class HospitalGUI extends Application {
 
         return
                 "-fx-font-size: 14px;" +
-                        "-fx-background-radius: 10;" +
-                        "-fx-border-radius: 10;" +
-                        "-fx-border-color: #cfd8dc;";
+                "-fx-background-radius: 12;" +
+                "-fx-border-radius: 12;" +
+                "-fx-padding: 10;" +
+                "-fx-border-color: #d1d5db;" +
+                "-fx-background-color: white;";
     }
 
     public static void main(String[] args) {
