@@ -8,10 +8,9 @@ import jakarta.persistence.*;
 public class Patient {
 
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int patientId;
+    private Long patientId;
 
     private String patientName;
 
@@ -19,34 +18,36 @@ public class Patient {
 
     private int totalFee;
 
-    // ================= GETTERS & SETTERS =================
+    // ================= GETTERS =================
 
-    public int getPatientId() {
+    public Long getPatientId() {
         return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
     }
 
     public String getPatientName() {
         return patientName;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
     public int getDays() {
         return days;
     }
 
-    public void setDays(int days) {
-        this.days = days;
-    }
-
     public int getTotalFee() {
         return totalFee;
+    }
+
+    // ================= SETTERS =================
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 
     public void setTotalFee(int totalFee) {
