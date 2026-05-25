@@ -1,8 +1,6 @@
 package com.hospital.backend.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "patients")
@@ -10,6 +8,9 @@ import jakarta.persistence.Table;
 public class Patient {
 
     @Id
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int patientId;
 
     private String patientName;
@@ -17,25 +18,6 @@ public class Patient {
     private int days;
 
     private int totalFee;
-
-    // ================= DEFAULT CONSTRUCTOR =================
-
-    public Patient() {
-
-    }
-
-    // ================= PARAMETERIZED CONSTRUCTOR =================
-
-    public Patient(int patientId,
-                   String patientName,
-                   int days,
-                   int totalFee) {
-
-        this.patientId = patientId;
-        this.patientName = patientName;
-        this.days = days;
-        this.totalFee = totalFee;
-    }
 
     // ================= GETTERS & SETTERS =================
 
