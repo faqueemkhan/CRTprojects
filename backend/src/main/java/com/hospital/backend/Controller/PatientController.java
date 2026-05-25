@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/patients")
+@CrossOrigin("*")
 
 public class PatientController {
 
@@ -20,7 +20,6 @@ public class PatientController {
     // ================= GET ALL PATIENTS =================
 
     @GetMapping
-
     public List<Patient> getAllPatients() {
 
         return patientRepository.findAll();
@@ -29,7 +28,6 @@ public class PatientController {
     // ================= SAVE PATIENT =================
 
     @PostMapping
-
     public Patient savePatient(
             @RequestBody Patient patient
     ) {
@@ -40,7 +38,6 @@ public class PatientController {
     // ================= DELETE PATIENT =================
 
     @DeleteMapping("/{id}")
-
     public String deletePatient(
             @PathVariable int id
     ) {
@@ -48,5 +45,16 @@ public class PatientController {
         patientRepository.deleteById(id);
 
         return "Patient Deleted Successfully";
+    }
+
+    // ================= GET SINGLE PATIENT =================
+
+    @GetMapping("/{id}")
+    public Patient getPatientById(
+            @PathVariable int id
+    ) {
+
+        return patientRepository.findById(id)
+                .orElse(null);
     }
 }
