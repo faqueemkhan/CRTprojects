@@ -5,7 +5,7 @@ function App() {
 
   // ================= BACKEND URL =================
 
-  const backendUrl = "http://localhost:8080";
+  const backendUrl = "https://crtprojects-1.onrender.com";
 
   // ================= STATES =================
 
