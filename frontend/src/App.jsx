@@ -11,7 +11,6 @@ function App() {
 
   const [patients, setPatients] = useState([]);
 
-  const [patientId, setPatientId] = useState("");
   const [patientName, setPatientName] = useState("");
   const [days, setDays] = useState("");
 
@@ -40,17 +39,12 @@ function App() {
 
     try {
 
-      const totalFee = days * 700;
+     const totalFee = Number(days) * 700;
 
-      const patient = {
-
-        patientId: Number(patientId),
-
-        patientName,
-
-        days: Number(days),
-
-        totalFee,
+    const patient = {
+       patientName: patientName,
+       days: Number(days),
+       totalFee: Number(totalFee),
       };
 
       await axios.post(
@@ -62,7 +56,6 @@ function App() {
 
       fetchPatients();
 
-      setPatientId("");
       setPatientName("");
       setDays("");
 
@@ -219,16 +212,6 @@ function App() {
             <div className="space-y-5">
 
               <input
-                type="number"
-                placeholder="Patient ID"
-                value={patientId}
-                onChange={(e) =>
-                  setPatientId(e.target.value)
-                }
-                className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-
-              <input
                 type="text"
                 placeholder="Patient Name"
                 value={patientName}
@@ -240,7 +223,7 @@ function App() {
 
               <input
                 type="number"
-                placeholder="Days"
+                placeholder="Number of Days"
                 value={days}
                 onChange={(e) =>
                   setDays(e.target.value)
@@ -317,8 +300,8 @@ function App() {
                       className="border-b hover:bg-slate-50"
                     >
 
-                      <td className="p-4">
-                        {patient.patientId}
+                      <td className="p-4 font-semibold text-blue-600">
+                        #{patient.patientId}
                       </td>
 
                       <td className="p-4 font-semibold">
